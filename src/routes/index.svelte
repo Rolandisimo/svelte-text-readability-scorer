@@ -70,7 +70,7 @@
 </script>
 
 <svelte:head>
-	<title>Text Score</title>
+  <title>Text Score</title>
 </svelte:head>
 
 <div class="container">
