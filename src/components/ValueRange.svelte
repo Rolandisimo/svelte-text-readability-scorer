@@ -4,7 +4,7 @@
   export let min = 0
   export let max = 100
   export let value;
-  $: valueInPercentages = value / max * 100;
+  $: valueInPercentages = 100 - (value / max * 100);
 
 
   afterUpdate(() => {

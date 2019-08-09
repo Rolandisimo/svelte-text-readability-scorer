@@ -32,7 +32,7 @@
 
   function calculateReadabilityScore(text) {
     if (!text) {
-      return 0;
+      return 120;
     }
 
     const asl = countWords(text) / countSentences(text);
@@ -67,7 +67,6 @@
 
     return count || 1;
   }
-
 </script>
 
 <svelte:head>
@@ -95,4 +94,3 @@
     />
   </div>
 </div>
-
