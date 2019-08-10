@@ -21,6 +21,10 @@
     margin: 0;
     color: #34495e;
   }
+  .score-value {
+    font-weight: bold;
+    color: black;
+  }
 </style>
 
 <script>
@@ -58,7 +62,7 @@
   <div class="score-container">
     <p class="score-label">
       <small>Flesch Kincaid Reading Ease:</small>
-      {fleschKincaidScore.toFixed(2)}
+      <span class="score-value">{fleschKincaidScore.toFixed(2)}</span>
     </p>
     <ValueRange
       reverse={true}
@@ -70,9 +74,10 @@
   <div class="score-container">
     <p class="score-label">
       <small>Gunning fog index:</small>
-      {gunningFlogScore.toFixed(2)}
+      <span class="score-value">{gunningFlogScore.toFixed(2)}</span>
+      <br/>
+      <small class="score-label">{GunningFlogScorer.scoringLevel(gunningFlogScore)}</small>
     </p>
-    <p class="score-label">{GunningFlogScorer.scoringLevel(gunningFlogScore)}</p>
     <ValueRange
       leftValue={MIN_GUNNING_FLOG}
       rightValue={MAX_GUNNING_FLOG}

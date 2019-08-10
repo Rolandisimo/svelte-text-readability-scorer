@@ -45,9 +45,14 @@ export class GunningFlogScorer {
     return score;
   }
   static scoringLevel(score) {
+    const integerScore = parseInt(score);
     const scores = Object.keys(scoreToLevelMap);
     const minScore = scores[0];
     const maxScore = scores[scores.length - 1];
+
+    if (integerScore < minScore) {
+      return "";
+    };
 
     if (score > maxScore) {
       return scoreToLevelMap[maxScore]
@@ -55,6 +60,6 @@ export class GunningFlogScorer {
       return scoreToLevelMap[minScore]
     }
 
-    return scoreToLevelMap[parseInt(score)]
+    return scoreToLevelMap[integerScore]
   }
 }
