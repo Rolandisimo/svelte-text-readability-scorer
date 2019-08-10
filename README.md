@@ -1,6 +1,6 @@
 # Text Readability evaluator
 A real-time svelte text readabilty evaluator based on various linguistic formulas.
-Demo: https://rolandisimo.github.io/svelte-text-readability-scorer/
+### Demo: https://rolandisimo.github.io/svelte-text-readability-scorer/
 
 ## Current scoring formulas:
 - Flesch–Kincaid
