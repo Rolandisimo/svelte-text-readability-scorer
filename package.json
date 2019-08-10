@@ -1,6 +1,6 @@
 {
-  "name": "todo",
-  "description": "TODO",
+  "name": "trevor",
+  "description": "Text Readability EValuatOR",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
@@ -12,7 +12,6 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
-    "ahocorasick": "^1.0.2",
     "compression": "^1.7.4",
     "cypress": "^3.4.1",
     "express": "^4.17.1",
