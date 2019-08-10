@@ -99,8 +99,8 @@
   <div class="container">
     <p><small>Flesch Kincaid Reading Ease:</small> {reScore.toFixed(2)}</p>
     <ValueRange
-      min={0}
-      max={120}
+      min={MIN_FLESC_KINCAID}
+      max={MAX_FLESC_KINCAID}
       value={reScore}
     />
   </div>
