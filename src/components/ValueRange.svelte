@@ -1,20 +1,13 @@
-<script>
-  import { afterUpdate } from 'svelte';
+<style lang="scss">
+  @mixin limitBarCommonStyles {
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    height: 1.5em;
+    background-color: #34495e;
+    border-radius: 100px;
+  }
 
-  export let min = 0
-  export let max = 100
-  export let value;
-  $: valueInPercentages = 100 - (value / max * 100);
-
-
-  afterUpdate(() => {
-    const containerElement = document.querySelector(".valueContainer");
-    const valueElement = document.querySelector(".currentValue");
-    valueElement.setAttribute("style", `left: calc(100% - ${valueInPercentages}%);`)
-  })
-</script>
-
-<style>
   .container {
     text-align: center;
     width: 100%;
@@ -31,32 +24,26 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    background-color: red;
+    background-color: #ecf0f1;
   }
   .minValue {
-    position: absolute;
     left: 0;
-    top: 50%;
-    width: .2em;
-    height: 1.5em;
-    transform: translateY(-50%);
-    background-color: black;
+    transform: translate(-100%, -50%);
+    @include limitBarCommonStyles;
   }
   .maxValue {
-    position: absolute;
     right: 0;
-    top: 50%;
-    width: .2em;
-    height: 1.5em;
-    transform: translateY(-50%);
-    background-color: black;
+    transform: translate(100%, -50%);
+    @include limitBarCommonStyles;
   }
 
   .currentValue {
     position: absolute;
-    background-color: blue;
-    width: 1em;
-    height: 1em;
+    background-color: #2c3e50;
+    width: 3vw;
+    height: 3vw;
+    max-width: 1em;
+    max-height: 1em;
     border-radius: 1000px;
     left: 43%;
     top: 50%;
@@ -71,6 +58,31 @@
   }
 </style>
 
+<script>
+  import { onMount } from 'svelte';
+  import { tweened } from 'svelte/motion';
+  import { cubicOut } from 'svelte/easing';
+
+  const progress = tweened(0, {
+		duration: 300,
+		easing: cubicOut
+	});
+
+  export let min = 0
+  export let max = 100
+  export let value;
+  let currentElementWidth = 0;
+  $: progress.set(value / max);
+
+  const setCurrentElementWidth = () => {
+    currentElementWidth = document.querySelector(".currentValue").getBoundingClientRect().width;
+  };
+
+  onMount(setCurrentElementWidth);
+</script>
+
+<svelte:window on:resize={setCurrentElementWidth} />
+
 <div class="container">
   <div class="valueContainer">
     <div class="range"></div>
@@ -80,6 +92,6 @@
     <div class="maxValue">
       <span class="limitLabel">{max}</span>
     </div>
-    <div class="currentValue"></div>
+    <div class="currentValue" style={`left: calc(${$progress * 100}% - ${$progress > 0.5 ? currentElementWidth : 0}px);`}></div>
   </div>
 </div>

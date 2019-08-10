@@ -20,8 +20,11 @@
   import FormGroup from "../components/FormGroup.svelte";
   import ValueRange from "../components/ValueRange.svelte";
 
-  $: reText = "";
-  $: reScore = Math.max(calculateReadabilityScore(reText), 0);
+  const MAX_FLESC_KINCAID = 120;
+  const MIN_FLESC_KINCAID = 0;
+
+  let reText = "";
+  $: reScore = calculateReadabilityScore(reText);
   let selected = "";
   const onFocus = function() {
     selected = this.id;
@@ -32,12 +35,20 @@
 
   function calculateReadabilityScore(text) {
     if (!text) {
-      return 120;
+      return MAX_FLESC_KINCAID;
     }
 
     const asl = countWords(text) / countSentences(text);
     const asw = countSyllables(text) / countWords(text);
-    return 206.835 - (1.015 * asl) - (84.6 * asw);
+    let score = 206.835 - (1.015 * asl) - (84.6 * asw);
+
+    if (score > MAX_FLESC_KINCAID) {
+      score = MAX_FLESC_KINCAID;
+    } else if(score < MIN_FLESC_KINCAID) {
+      score = MIN_FLESC_KINCAID;
+    }
+
+    return score;
   }
 
   function countWords(text) {
@@ -86,7 +97,7 @@
     placeholder="Write your text here and see the score being calculated"
   />
   <div class="container">
-    <p>Flesch Kincaid Reading Ease: {reScore}</p>
+    <p><small>Flesch Kincaid Reading Ease:</small> {reScore.toFixed(2)}</p>
     <ValueRange
       min={0}
       max={120}
