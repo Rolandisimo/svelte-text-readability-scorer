@@ -5,6 +5,8 @@
   :global(input),
   :global(textarea) {
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.10);
+    border: .1em solid rgba(0, 0, 0, 0.10);
+    -webkit-appearance: none;
     border: 0;
     font-family: inherit;
     font-size: inherit;
