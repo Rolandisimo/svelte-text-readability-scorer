@@ -2,9 +2,9 @@
   "bundler": "webpack",
   "shimport": null,
   "assets": {
-    "index": "e1076cf3954627f2de36/index.index.js",
-    "main": "e1076cf3954627f2de36/main.js",
-    "vendors~index": "e1076cf3954627f2de36/vendors~index.vendors~index.js"
+    "index": "333c8cbff362096960fd/index.index.js",
+    "main": "333c8cbff362096960fd/main.js",
+    "vendors~index": "333c8cbff362096960fd/vendors~index.vendors~index.js"
   },
   "css": {
     "chunks": {
