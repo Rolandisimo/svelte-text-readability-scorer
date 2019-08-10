@@ -1,9 +1,10 @@
 <style lang="scss">
+  $rangeContainerHeight: 1.5em;
   @mixin limitBarCommonStyles {
     position: absolute;
     top: 50%;
     width: 1px;
-    height: 1.5em;
+    height: $rangeContainerHeight;
     background-color: #34495e;
     border-radius: 100px;
   }
@@ -17,6 +18,9 @@
     position: relative;
     width: 50%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: $rangeContainerHeight;
   }
   .range {
     height: 2px;
@@ -25,6 +29,7 @@
     top: 50%;
     transform: translateY(-50%);
     background-color: #ecf0f1;
+    flex: 1;
   }
   .minValue {
     left: 0;
@@ -68,17 +73,21 @@
 		easing: cubicOut
 	});
 
-  export let min = 0
-  export let max = 100
+  export let leftValue;
+  export let rightValue;
   export let value;
+  export let reverse = false;
   let currentElementWidth = 0;
-  $: progress.set(value / max);
+  $: progress.set(value / Math.max(rightValue, leftValue));
 
   const setCurrentElementWidth = () => {
     currentElementWidth = document.querySelector(".currentValue").getBoundingClientRect().width;
   };
-
   onMount(setCurrentElementWidth);
+
+  $: currentValueElementWidthHasToBeSubtracted = (reverse ? $progress < 0.5 : $progress > 0.5);
+  $: subtractValueToPreventOverflow = `${currentValueElementWidthHasToBeSubtracted ? currentElementWidth : 0}px`;
+  $: currentValueStyle = `left: calc(${reverse ? "100% - " : ""}${$progress * 100}% - ${subtractValueToPreventOverflow});`;
 </script>
 
 <svelte:window on:resize={setCurrentElementWidth} />
@@ -87,11 +96,11 @@
   <div class="valueContainer">
     <div class="range"></div>
     <div class="minValue">
-      <span class="limitLabel">{min}</span>
+      <span class="limitLabel">{leftValue}</span>
     </div>
     <div class="maxValue">
-      <span class="limitLabel">{max}</span>
+      <span class="limitLabel">{rightValue}</span>
     </div>
-    <div class="currentValue" style={`left: calc(${$progress * 100}% - ${$progress > 0.5 ? currentElementWidth : 0}px);`}></div>
+    <div class="currentValue" style={currentValueStyle} />
   </div>
 </div>

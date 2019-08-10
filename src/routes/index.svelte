@@ -14,70 +14,32 @@
     flex-direction: column;
     text-align: center;
   }
+  .score-container {
+    margin: 1em 0;
+  }
+  .score-label {
+    margin: 0;
+    color: #34495e;
+  }
 </style>
 
 <script>
   import FormGroup from "../components/FormGroup.svelte";
   import ValueRange from "../components/ValueRange.svelte";
+  import {
+    FleschKincaidScorer,
+    MAX_FLESC_KINCAID,
+    MIN_FLESC_KINCAID,
+  } from "../components/FleschKincaidScorer.js";
+  import {
+    GunningFlogScorer,
+    MAX_GUNNING_FLOG,
+    MIN_GUNNING_FLOG,
+  } from "../components/GunningFlogScorer.js";
 
-  const MAX_FLESC_KINCAID = 120;
-  const MIN_FLESC_KINCAID = 0;
-
-  let reText = "";
-  $: reScore = calculateReadabilityScore(reText);
-  let selected = "";
-  const onFocus = function() {
-    selected = this.id;
-  }
-  const onBlur = function() {
-    selected = "";
-  }
-
-  function calculateReadabilityScore(text) {
-    if (!text) {
-      return MAX_FLESC_KINCAID;
-    }
-
-    const asl = countWords(text) / countSentences(text);
-    const asw = countSyllables(text) / countWords(text);
-    let score = 206.835 - (1.015 * asl) - (84.6 * asw);
-
-    if (score > MAX_FLESC_KINCAID) {
-      score = MAX_FLESC_KINCAID;
-    } else if(score < MIN_FLESC_KINCAID) {
-      score = MIN_FLESC_KINCAID;
-    }
-
-    return score;
-  }
-
-  function countWords(text) {
-    return findWords(text).length || 1;
-  }
-
-  function findWords(text) {
-    return text.match(/([^\u0000-\u007F]|\w)+/g) || [];
-  }
-
-  function countSentences(text) {
-    const match = text.match(/[\w|\)][.?!](\s|$)/g) || [];
-    return match.length || 1;
-  }
-
-  function countSyllables(text) {
-    const textLower = text.toLowerCase();
-    let count = 0;
-
-    findWords(textLower).forEach(w => {
-      let word = w;
-      word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
-      word = word.replace(/^y/, '');
-      const match = word.match(/[aeiouy]{1,2}/g) || [];
-      count += match.length;
-    })
-
-    return count || 1;
-  }
+  let subjectText = "";
+  $: fleschKincaidScore = FleschKincaidScorer.calculate(subjectText);
+  $: gunningFlogScore = GunningFlogScorer.calculate(subjectText);
 </script>
 
 <svelte:head>
@@ -89,19 +51,31 @@
   <small></small>
   <hr/>
   <FormGroup
-    selected={selected}
-    id={"re"}
-    onFocus={onFocus}
-    onBlur={onBlur}
-    bind:value={reText}
+    id={"subjectText"}
+    bind:value={subjectText}
     placeholder="Write your text here and see the score being calculated"
   />
-  <div class="container">
-    <p><small>Flesch Kincaid Reading Ease:</small> {reScore.toFixed(2)}</p>
+  <div class="score-container">
+    <p class="score-label">
+      <small>Flesch Kincaid Reading Ease:</small>
+      {fleschKincaidScore.toFixed(2)}
+    </p>
     <ValueRange
-      min={MIN_FLESC_KINCAID}
-      max={MAX_FLESC_KINCAID}
-      value={reScore}
+      reverse={true}
+      rightValue={MIN_FLESC_KINCAID}
+      leftValue={MAX_FLESC_KINCAID}
+      value={fleschKincaidScore}
+    />
+  </div>
+  <div class="score-container">
+    <p class="score-label">
+      <small>Gunning fog index:</small>
+      {gunningFlogScore.toFixed(2)}
+    </p>
+    <ValueRange
+      leftValue={MIN_GUNNING_FLOG}
+      rightValue={MAX_GUNNING_FLOG}
+      value={gunningFlogScore}
     />
   </div>
 </div>

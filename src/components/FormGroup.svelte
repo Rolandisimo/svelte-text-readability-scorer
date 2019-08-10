@@ -28,9 +28,6 @@
   export let labelText = "";
   export let id = "";
   export let placeholder = "";
-
-  export let onFocus;
-  export let onBlur;
 </script>
 
 <div class="form-group">
@@ -39,8 +36,6 @@
     id={id}
     class="form-input"
     type="text"
-    on:focus={onFocus}
-    on:blur={onBlur}
     bind:value={value}
     placeholder={placeholder}
     aria-placeholder={placeholder}

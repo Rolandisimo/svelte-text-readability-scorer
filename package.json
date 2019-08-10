@@ -19,7 +19,8 @@
     "helmet": "^3.20.0",
     "markdown-it": "^9.0.1",
     "polka": "^0.5.2",
-    "sirv": "^0.4.2"
+    "sirv": "^0.4.2",
+    "syllable": "^3.6.1"
   },
   "devDependencies": {
     "node-sass": "^4.12.0",
