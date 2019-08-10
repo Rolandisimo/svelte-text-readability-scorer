@@ -11,6 +11,7 @@ const app = express();
 
 app.use(helmet());
 app.use(
+  "/svelte-text-readability-scorer",
 	compression({ threshold: 0 }),
 	sirv('static', { dev }),
 	sapper.middleware()

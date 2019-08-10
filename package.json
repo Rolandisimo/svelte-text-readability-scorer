@@ -9,7 +9,8 @@
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "test": "run-p --race dev cy:run"
+    "test": "run-p --race dev cy:run",
+    "publish-gh-pages": "git push origin --delete gh-pages && git subtree push --prefix __sapper__/export/svelte-text-readability-scorer origin gh-pages"
   },
   "dependencies": {
     "compression": "^1.7.4",
