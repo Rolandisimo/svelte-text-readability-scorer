@@ -1,8 +1,9 @@
 # Text Readability evaluator
-A simple text evaluator based on formulas such as Flesch–Kincaid formula and others.
+A real-time svelte text readabilty evaluator based on various linguistic formulas.
 
 ## Current scoring formulas:
 - Flesch–Kincaid
+- Gunning Flog
 
 ## Usage
 - npm i
