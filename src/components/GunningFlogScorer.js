@@ -7,6 +7,24 @@ import {
 export const MIN_GUNNING_FLOG = 0;
 export const MAX_GUNNING_FLOG = 30;
 
+const scoreToLevelMap = {
+  20:	"Post-graduate Plus",
+  19:	"Post-graduate",
+  18:	"Post-graduate",
+  17:	"College graduate",
+  16:	"College senior",
+  15:	"College junior",
+  14:	"College sophomore",
+  13:	"College freshman",
+  12:	"High school senior",
+  11:	"High school junior",
+  10:	"High school sophomore",
+  9:	"High school freshman",
+  8:	"Eighth grade",
+  7:	"Seventh grade",
+  6:	"Sixth grade",
+}
+
 export class GunningFlogScorer {
   static calculate(text) {
     if (!text) {
@@ -25,5 +43,18 @@ export class GunningFlogScorer {
     }
 
     return score;
+  }
+  static scoringLevel(score) {
+    const scores = Object.keys(scoreToLevelMap);
+    const minScore = scores[0];
+    const maxScore = scores[scores.length - 1];
+
+    if (score > maxScore) {
+      return scoreToLevelMap[maxScore]
+    } else if (score < minScore) {
+      return scoreToLevelMap[minScore]
+    }
+
+    return scoreToLevelMap[parseInt(score)]
   }
 }

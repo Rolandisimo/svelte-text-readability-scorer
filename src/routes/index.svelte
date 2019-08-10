@@ -72,6 +72,7 @@
       <small>Gunning fog index:</small>
       {gunningFlogScore.toFixed(2)}
     </p>
+    <p class="score-label">{GunningFlogScorer.scoringLevel(gunningFlogScore)}</p>
     <ValueRange
       leftValue={MIN_GUNNING_FLOG}
       rightValue={MAX_GUNNING_FLOG}
