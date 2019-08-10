@@ -23,7 +23,13 @@
     display: flex;
     align-items: center;
     height: $rangeContainerHeight;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
+
+
   .range {
     height: 2px;
     left: 0;
