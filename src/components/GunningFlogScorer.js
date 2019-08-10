@@ -28,7 +28,7 @@ const scoreToLevelMap = {
 export class GunningFlogScorer {
   static calculate(text) {
     if (!text) {
-      return MAX_GUNNING_FLOG;
+      return MIN_GUNNING_FLOG;
     }
 
     const words = countWords(text);
