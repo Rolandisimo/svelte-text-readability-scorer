@@ -1,11 +1,13 @@
 <style lang="scss">
   $rangeContainerHeight: 1.5em;
+  $darkColor: #34495e;
+  $lightColor: #ecf0f1;
   @mixin limitBarCommonStyles {
     position: absolute;
     top: 50%;
     width: 1px;
     height: $rangeContainerHeight;
-    background-color: #34495e;
+    background-color: $darkColor;
     border-radius: 100px;
   }
 
@@ -28,7 +30,7 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #ecf0f1;
+    background-color: $lightColor;
     flex: 1;
   }
   .minValue {
@@ -44,7 +46,7 @@
 
   .currentValue {
     position: absolute;
-    background-color: #2c3e50;
+    background-color: $darkColor;
     width: 3vw;
     height: 3vw;
     max-width: 1em;
@@ -53,6 +55,7 @@
     left: 43%;
     top: 50%;
     transform: translateY(-50%);
+    border: 1px solid $darkColor;
   }
 
   .limitLabel {

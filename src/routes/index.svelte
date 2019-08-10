@@ -21,10 +21,6 @@
     margin: 0;
     color: #34495e;
   }
-  .score-value {
-    font-weight: bold;
-    color: black;
-  }
 </style>
 
 <script>
