@@ -10,7 +10,17 @@ const root = process.env.BASE_URL || "/";
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet({
+	contentSecurityPolicy: {
+		directives: {
+			scriptSrc: [
+				"'self'",
+				(req, res) => `'nonce-${res.locals.nonce}'`
+			]
+		}
+	}
+}));
+
 app.use(
   root,
 	compression({ threshold: 0 }),
