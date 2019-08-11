@@ -29,7 +29,6 @@
     }
   }
 
-
   .range {
     height: 2px;
     left: 0;
@@ -61,7 +60,6 @@
     left: 43%;
     top: 50%;
     transform: translateY(-50%);
-    border: 1px solid $darkColor;
   }
 
   .limitLabel {
@@ -76,34 +74,39 @@
   import { onMount } from 'svelte';
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
-
-  const progress = tweened(0, {
-		duration: 300,
-		easing: cubicOut
-	});
+  import { createRGBValue } from "../helpers/createRGBValue";
 
   export let leftValue;
   export let rightValue;
   export let value;
   export let reverse = false;
-  let currentElementWidth = 0;
-  $: progress.set(value / Math.max(rightValue, leftValue));
 
+  let currentElementWidth = 0;
+  const colors = [
+    { red: 46, green: 204, blue: 113, },
+    { red: 243, green: 156, blue: 18, },
+    { red: 231, green: 76, blue: 60, },
+  ];
+  const progress = tweened(0, { duration: 300, easing: cubicOut });
   const setCurrentElementWidth = () => {
     currentElementWidth = document.querySelector(".currentValue").getBoundingClientRect().width;
   };
-  onMount(setCurrentElementWidth);
 
+  $: progress.set(value / Math.max(rightValue, leftValue));
   $: currentValueElementWidthHasToBeSubtracted = (reverse ? $progress < 0.5 : $progress > 0.5);
   $: subtractValueToPreventOverflow = `${currentValueElementWidthHasToBeSubtracted ? currentElementWidth : 0}px`;
-  $: currentValueStyle = `left: calc(${reverse ? "100% - " : ""}${$progress * 100}% - ${subtractValueToPreventOverflow});`;
+  $: color = createRGBValue(reverse ? 1 - $progress : $progress, colors);
+  $: rgb = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+  $: currentValueStyle = `background-color: ${rgb}; left: calc(${reverse ? "100% - " : ""}${$progress * 100}% - ${subtractValueToPreventOverflow});`;
+
+  onMount(setCurrentElementWidth);
 </script>
 
 <svelte:window on:resize={setCurrentElementWidth} />
 
 <div class="container">
   <div class="valueContainer">
-    <div class="range"></div>
+    <div class="range" />
     <div class="minValue">
       <span class="limitLabel">{leftValue}</span>
     </div>
