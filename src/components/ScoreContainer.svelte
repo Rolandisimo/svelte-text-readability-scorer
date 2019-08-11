@@ -13,7 +13,7 @@
 
   export let title;
   export let subtitle = "";
-  export let value;
+  export let value = 0.5;
   export let leftValue;
   export let rightValue;
   export let reverse = undefined;
@@ -24,17 +24,21 @@
     rightValue,
     reverse,
   };
+  $: rangeHasToRender = leftValue >= 0 && rightValue >= 0;
 </script>
 
 <div class="container">
   <p class="label">
     <small>{title}:</small>
-    {value && value.toFixed(2)}
+    {value && value.toFixed(2).replace(".00", "")}
 
     {#if subtitle}
       <br/>
       <small class="label">{subtitle}</small>
     {/if}
   </p>
-  <ValueRange {...valueRangeProps} />
+
+  {#if rangeHasToRender}
+    <ValueRange {...valueRangeProps} />
+  {/if}
 </div>

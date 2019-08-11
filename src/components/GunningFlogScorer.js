@@ -31,8 +31,9 @@ export class GunningFlogScorer {
       return MIN_GUNNING_FLOG;
     }
 
-    const words = countWords(text);
-    const asl = words / countSentences(text);
+    const words = countWords(text) || 1;
+    const sentences = countSentences(text) || 1;
+    const asl = words / sentences;
     const phw = 100 * (countHardWords(text) / words);
     let score = 0.4 * (asl + phw)
 

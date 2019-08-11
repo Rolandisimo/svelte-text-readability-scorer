@@ -1,7 +1,19 @@
 import syllable from "syllable";
 
+// TODO: Improve logic so that only a portion of
+// the text is evaluated and thus averaged e.g. only first 100 words/sentences/etc
+
 export function countWords(text) {
-  return findWords(text).length || 1;
+  return findWords(text).length;
+}
+
+export function countAvgLetters(text) {
+  const words = findWords(text) || 1;
+
+  return words.reduce((res, curr) => {
+      res += curr.length;
+      return res;
+    }, 0) / words.length;
 }
 
 export function findWords(text) {
@@ -10,7 +22,7 @@ export function findWords(text) {
 
 export function countSentences(text) {
   const match = text.match(/[\w]\)?[.?!](\s|$)/g) || [];
-  return match.length || 1;
+  return match.length;
 }
 
 export function countHardWords(text) {
@@ -18,7 +30,7 @@ export function countHardWords(text) {
   let count = 0;
 
   findWords(textLower).forEach(word => {
-    if (countWordSyllables(word) >= 3) {
+    if (syllable(word) >= 3) {
       count += 1;
     }
   })
@@ -31,13 +43,10 @@ export function countSyllables(text) {
   let count = 0;
 
   findWords(textLower).forEach(word=> {
-    count += countWordSyllables(word);
+    count += syllable(word);
   })
 
   return count
 
 }
 
-function countWordSyllables(originalWord) {
-  return syllable(originalWord)
-}

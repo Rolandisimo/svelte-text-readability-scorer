@@ -13,8 +13,9 @@ export class FleschKincaidScorer {
       return MAX_FLESC_KINCAID;
     }
 
-    const words = countWords(text);
-    const asl = words / countSentences(text);
+    const words = countWords(text) || 1;
+    const sentences = countSentences(text) || 1;
+    const asl = words / sentences;
     const asw = countSyllables(text) / words;
     let score = 206.835 - (1.015 * asl) - (84.6 * asw);
 
