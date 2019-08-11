@@ -15,18 +15,13 @@
     flex-direction: column;
     text-align: center;
   }
-  .score-container {
-    margin: 1em 0;
-  }
-  .score-label {
-    margin: 0;
-    color: #34495e;
-  }
 </style>
 
 <script>
   import FormGroup from "../components/FormGroup.svelte";
   import ValueRange from "../components/ValueRange.svelte";
+  import ScoreContainer from "../components/ScoreContainer.svelte";
+
   import {
     FleschKincaidScorer,
     MAX_FLESC_KINCAID,
@@ -56,29 +51,19 @@
     bind:value={subjectText}
     placeholder="Write your text here and see the score being calculated"
   />
-  <div class="score-container">
-    <p class="score-label">
-      <small>Flesch Kincaid Reading Ease:</small>
-      <span class="score-value">{fleschKincaidScore.toFixed(2)}</span>
-    </p>
-    <ValueRange
-      reverse={true}
-      rightValue={MIN_FLESC_KINCAID}
-      leftValue={MAX_FLESC_KINCAID}
-      value={fleschKincaidScore}
-    />
-  </div>
-  <div class="score-container">
-    <p class="score-label">
-      <small>Gunning fog index:</small>
-      <span class="score-value">{gunningFlogScore.toFixed(2)}</span>
-      <br/>
-      <small class="score-label">{GunningFlogScorer.scoringLevel(gunningFlogScore)}</small>
-    </p>
-    <ValueRange
-      leftValue={MIN_GUNNING_FLOG}
-      rightValue={MAX_GUNNING_FLOG}
-      value={gunningFlogScore}
-    />
-  </div>
+
+  <ScoreContainer
+    title="Flesch Kincaid Reading Ease"
+    value={fleschKincaidScore}
+    leftValue={MAX_FLESC_KINCAID}
+    rightValue={MIN_FLESC_KINCAID}
+    reverse={true}
+  />
+  <ScoreContainer
+    title="Gunning fog index"
+    value={gunningFlogScore}
+    subtitle={GunningFlogScorer.scoringLevel(gunningFlogScore)}
+    leftValue={MIN_GUNNING_FLOG}
+    rightValue={MAX_GUNNING_FLOG}
+  />
 </div>
