@@ -4,7 +4,7 @@ import {
   countWords,
 } from "../helpers/writtenLanguageHelpers";
 
-export const MAX_FLESC_KINCAID = 120;
+export const MAX_FLESC_KINCAID = 100;
 export const MIN_FLESC_KINCAID = 0;
 
 export class FleschKincaidScorer {

@@ -16,17 +16,9 @@
     text-align: center;
   }
 
-  .meta-scores {
-    margin: 1em 0;
-    align-self: flex-start;
-    text-align: left;
-    font-size: .8em;
-
-    p { margin: 0; }
-    small {
-      margin: 0;
-      color: #34495e;
-    }
+  .read-more-info {
+    font-style: italic;
+    color: rgba(127, 140, 141, .7);
   }
 </style>
 
@@ -34,6 +26,8 @@
   import FormGroup from "../components/FormGroup.svelte";
   import ValueRange from "../components/ValueRange.svelte";
   import ScoreContainer from "../components/ScoreContainer.svelte";
+  import MetaScores from "../components/MetaScores.svelte";
+  import Link from "../components/Link.svelte";
   import { countWords, countSentences } from "../helpers/writtenLanguageHelpers.js";
   import {
     FleschKincaidScorer,
@@ -57,40 +51,34 @@
   $: colemanLiauScore = ColemanLiauScorer.calculate(subjectText);
 </script>
 
-<svelte:head>
-  <title>Text Score</title>
-</svelte:head>
-
 <div class="container">
   <h1>How readable is your text?</h1>
-  <hr/>
+
   <FormGroup
     id={"subjectText"}
     bind:value={subjectText}
     placeholder="Write your text here and see the score being calculated"
   />
 
-  <div class="meta-scores">
-    <p><small>Word Count:</small> {countWords(subjectText)}</p>
-    <p><small>Number of Sentences:</small> {countSentences(subjectText)}</p>
-  </div>
+  <MetaScores text={subjectText} />
+  <h6 class="read-more-info">Click on the titles to learn more about the formulas!</h6>
 
   <ScoreContainer
-    title="Flesch Kincaid Reading Ease"
+    title="<a href='/formulas/flesch-kincaid' rel='prefetch'>Flesch Kincaid Reading Ease</a>"
     value={fleschKincaidScore}
     leftValue={MAX_FLESC_KINCAID}
     rightValue={MIN_FLESC_KINCAID}
     reverse={true}
   />
   <ScoreContainer
-    title="Gunning Fog Index"
+    title="<a href='/formulas/gunning-flog' rel='prefetch'>Gunning Fog Index</a>"
     value={gunningFlogScore}
     subtitle={GunningFlogScorer.scoringLevel(gunningFlogScore)}
     leftValue={MIN_GUNNING_FLOG}
     rightValue={MAX_GUNNING_FLOG}
   />
   <ScoreContainer
-    title="Coleman Liau Index"
+    title="<a href='/formulas/coleman-liau' rel='prefetch'>Coleman Liau Index</a>"
     value={colemanLiauScore}
     leftValue={MIN_COLEMAN_LIAU_INDEX}
     rightValue={MAX_COLEMAN_LIAU_INDEX}

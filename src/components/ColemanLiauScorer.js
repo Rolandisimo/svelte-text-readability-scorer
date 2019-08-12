@@ -4,7 +4,7 @@ import {
   countWords,
 } from "../helpers/writtenLanguageHelpers";
 
-export const MAX_COLEMAN_LIAU_INDEX = 100;
+export const MAX_COLEMAN_LIAU_INDEX = 30;
 export const MIN_COLEMAN_LIAU_INDEX = 0;
 
 export class ColemanLiauScorer {

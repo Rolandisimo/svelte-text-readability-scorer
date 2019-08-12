@@ -6,6 +6,15 @@
     margin: 0;
     color: #34495e;
   }
+
+
+  .page-link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: initial;
+    }
+  }
 </style>
 
 <script>
@@ -29,7 +38,7 @@
 
 <div class="container">
   <p class="label">
-    <small>{title}:</small>
+    <small class="page-link">{@html title}:</small>
     {value && value.toFixed(2).replace(".00", "")}
 
     {#if subtitle}
