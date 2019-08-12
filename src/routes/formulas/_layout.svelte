@@ -55,18 +55,21 @@
 <script>
   import { onMount } from "svelte";
 
+  let root = "/svelte-text-readability-scorer"
   onMount(() => {
     const table = document.querySelector("table");
     /** Styles cherry-picked from Bootstrap
      * @see https://getbootstrap.com/docs/4.0/content/tables
      */
-    table && table.classList.add("table", "table-striped", "table-responsive-sm")
-  });
+    table && table.classList.add("table", "table-striped", "table-responsive-sm");
 
-  const root = window.location.pathname.split("/") ? window.location.pathname.split("/")[1] : "";
+    if (!window.location.href.includes("svelte-text-readability-scorer")) {
+      root = "/";
+    }
+  });
 </script>
 
 <main>
-  <a href={`/${root}`}>Back</a>
+  <a href={root}>Back</a>
   <slot></slot>
 </main>
