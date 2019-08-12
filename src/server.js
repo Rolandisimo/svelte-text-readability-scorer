@@ -14,11 +14,17 @@ app.use(helmet());
 
 app.use(
   root,
-	compression({ threshold: 0 }),
-	sirv('static', { dev }),
-	sapper.middleware()
+  compression({ threshold: 0 }),
+  sirv('static', { dev })
+);
+app.use(
+  `${root}/formulas/*`,
+  compression({ threshold: 0 }),
+  sirv('static', { dev })
 );
 
+app.use(sapper.middleware());
+
 app.listen(PORT, err => {
-	if (err) console.log('error', err);
+  if (err) console.log('error', err);
 });

@@ -2,6 +2,9 @@
   * {
     font-family: "Montserrat", sans-serif;
   }
+  :global(a:hover) {
+    opacity: .8;
+  }
   :global(input),
   :global(textarea) {
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.10);
@@ -27,7 +30,6 @@
   import ValueRange from "../components/ValueRange.svelte";
   import ScoreContainer from "../components/ScoreContainer.svelte";
   import MetaScores from "../components/MetaScores.svelte";
-  import Link from "../components/Link.svelte";
   import { countWords, countSentences } from "../helpers/writtenLanguageHelpers.js";
   import {
     FleschKincaidScorer,
