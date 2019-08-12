@@ -52,7 +52,7 @@
   $: gunningFlogScore = GunningFlogScorer.calculate(subjectText);
   $: colemanLiauScore = ColemanLiauScorer.calculate(subjectText);
 
-  const root = window.location.pathname.split("/") ? window.location.pathname.split("/")[1] : "/";
+  const root = window.location.pathname.split("/") ? window.location.pathname.split("/")[1] : "";
 </script>
 
 <div class="container">

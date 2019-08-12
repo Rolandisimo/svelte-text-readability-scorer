@@ -63,10 +63,10 @@
     table && table.classList.add("table", "table-striped", "table-responsive-sm")
   });
 
-  const root = window.location.pathname.split("/") ? window.location.pathname.split("/")[1] : "/";
+  const root = window.location.pathname.split("/") ? window.location.pathname.split("/")[1] : "";
 </script>
 
 <main>
-  <a href={root}>Back</a>
+  <a href={`/${root}`}>Back</a>
   <slot></slot>
 </main>
