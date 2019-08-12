@@ -3,8 +3,9 @@ A real-time svelte text readabilty evaluator based on various linguistic formula
 ### Demo: https://rolandisimo.github.io/svelte-text-readability-scorer/
 
 ## Current scoring formulas:
-- Flesch–Kincaid
-- Gunning Flog
+- Flesch–Kincaid Readability Ease
+- Gunning Flog Index
+- Coleman-Liau Index
 
 ## Usage
 - npm i
