@@ -12,7 +12,7 @@
 </style>
 
 <script>
-  export let value = ""
+  export let value = "";
   export let selected = "";
   export let labelText = "";
   export let id = "";

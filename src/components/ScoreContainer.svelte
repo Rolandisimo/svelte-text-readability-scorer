@@ -33,7 +33,6 @@
     rightValue,
     reverse,
   };
-  $: rangeHasToRender = leftValue >= 0 && rightValue >= 0;
 </script>
 
 <div class="container">
@@ -47,7 +46,5 @@
     {/if}
   </p>
 
-  {#if rangeHasToRender}
-    <ValueRange {...valueRangeProps} />
-  {/if}
+  <ValueRange {...valueRangeProps} />
 </div>

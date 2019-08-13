@@ -1,18 +1,4 @@
 <style lang="scss">
-  :global(*){
-    font-family: "Montserrat", sans-serif;
-  }
-  :global(a:hover) {
-    opacity: .8;
-  }
-  :global(input),
-  :global(textarea) {
-    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.10);
-    -webkit-appearance: none;
-    border: 0;
-    font-family: inherit;
-    font-size: inherit;
-  }
   .container {
     display: flex;
     flex-direction: column;
@@ -22,43 +8,20 @@
   .read-more-info {
     font-style: italic;
     color: rgba(127, 140, 141, .7);
+    margin: 1em 0;
   }
 </style>
 
 <script>
-  import { onMount } from "svelte";
+  import { beforeUpdate } from "svelte";
+  import { writable } from "svelte/store";
+
   import FormGroup from "../components/FormGroup.svelte";
-  import ValueRange from "../components/ValueRange.svelte";
-  import ScoreContainer from "../components/ScoreContainer.svelte";
   import MetaScores from "../components/MetaScores.svelte";
-  import { countWords, countSentences } from "../helpers/writtenLanguageHelpers.js";
-  import {
-    FleschKincaidScorer,
-    MAX_FLESC_KINCAID,
-    MIN_FLESC_KINCAID,
-  } from "../components/FleschKincaidScorer.js";
-  import {
-    ColemanLiauScorer,
-    MAX_COLEMAN_LIAU_INDEX,
-    MIN_COLEMAN_LIAU_INDEX,
-  } from "../components/ColemanLiauScorer.js";
-  import {
-    GunningFlogScorer,
-    MAX_GUNNING_FLOG,
-    MIN_GUNNING_FLOG,
-  } from "../components/GunningFlogScorer.js";
+  import Scores from "../components/Scores.svelte";
 
-  let subjectText = "";
-  $: fleschKincaidScore = FleschKincaidScorer.calculate(subjectText);
-  $: gunningFlogScore = GunningFlogScorer.calculate(subjectText);
-  $: colemanLiauScore = ColemanLiauScorer.calculate(subjectText);
-
-  let root = "/svelte-text-readability-scorer";
-  onMount(() => {
-    if (!window.location.href.includes("svelte-text-readability-scorer")) {
-      root = "";
-    }
-  });
+  let text = "";
+  $: cleanText = text.trim();
 </script>
 
 <div class="container">
@@ -66,31 +29,12 @@
 
   <FormGroup
     id={"subjectText"}
-    bind:value={subjectText}
+    bind:value={text}
     placeholder="Write your text here and see the score being calculated"
   />
 
-  <MetaScores text={subjectText} />
+  <MetaScores text={cleanText} />
   <h6 class="read-more-info">Click on the titles to learn more about the formulas!</h6>
 
-  <ScoreContainer
-    title={`<a href="${root}/formulas/flesch-kincaid">Flesch Kincaid Reading Ease</a>`}
-    value={fleschKincaidScore}
-    leftValue={MAX_FLESC_KINCAID}
-    rightValue={MIN_FLESC_KINCAID}
-    reverse={true}
-  />
-  <ScoreContainer
-    title={`<a href="${root}/formulas/gunning-flog">Gunning Fog Index</a>`}
-    value={gunningFlogScore}
-    subtitle={GunningFlogScorer.scoringLevel(gunningFlogScore)}
-    leftValue={MIN_GUNNING_FLOG}
-    rightValue={MAX_GUNNING_FLOG}
-  />
-  <ScoreContainer
-    title={`<a href="${root}/formulas/coleman-liau">Coleman Liau Index</a>`}
-    value={colemanLiauScore}
-    leftValue={MIN_COLEMAN_LIAU_INDEX}
-    rightValue={MAX_COLEMAN_LIAU_INDEX}
-  />
+  <Scores text={cleanText} />
 </div>

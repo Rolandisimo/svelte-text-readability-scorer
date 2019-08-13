@@ -92,6 +92,18 @@
     currentElementWidth = document.querySelector(".currentValue").getBoundingClientRect().width;
   };
 
+  /**
+   *  Ensure the minimum position of the progress is 0%
+   */
+  $: {
+    if (
+      (leftValue < rightValue && value === leftValue)
+      || (rightValue < leftValue && value === rightValue)
+    ) {
+      value = 0;
+    }
+  }
+
   $: progress.set(value / Math.max(rightValue, leftValue));
   $: currentValueElementWidthHasToBeSubtracted = (reverse ? $progress < 0.5 : $progress > 0.5);
   $: subtractValueToPreventOverflow = `${currentValueElementWidthHasToBeSubtracted ? currentElementWidth : 0}px`;

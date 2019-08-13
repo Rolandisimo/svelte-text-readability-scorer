@@ -8,12 +8,11 @@ export function countWords(text) {
 }
 
 export function countAvgLetters(text) {
-  const words = findWords(text) || 1;
-
+  const words = findWords(text);
   return words.reduce((res, curr) => {
       res += curr.length;
       return res;
-    }, 0) / words.length;
+  }, 0) / (words.length || 1);
 }
 
 export function findWords(text) {

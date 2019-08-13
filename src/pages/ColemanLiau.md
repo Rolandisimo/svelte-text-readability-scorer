@@ -5,6 +5,27 @@ Coleman said he created the formula as one of the many ways to help the U.S. Off
 
 Similar to the Automated Readability Index, but unlike most of the other grade-level predictors, the Coleman–Liau relies on characters instead of syllables per word. Instead of using syllable/word and sentence length indices, Meri Coleman and T. L. Liau believed that computerized assessments understand characters more easily and accurately than counting syllables and sentence length.
 
+# Ranking
+Ranking is similar to the Gunning Flog Index:
+
+Fog | Index	Reading level by grade
+:---: | :---:
+20	| Post graduate Plus
+19	| Post graduate Plus
+18	| Post graduate
+17	| College graduate
+16 |	College senior
+15 |	College junior
+14 |	College sophomore
+13 |	College freshman
+12 |	High school senior
+11 |	High school junior
+10 |	High school sophomore
+9 |	High school freshman
+8 |	Eighth grade
+7 |	Seventh grade
+6 |	Sixth grade
+
 <hr/>
 
 Want to learn more?<br/>
