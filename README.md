@@ -6,6 +6,7 @@ A real-time svelte text readabilty evaluator based on various linguistic formula
 - Flesch–Kincaid Readability Ease
 - Gunning Flog Index
 - Coleman-Liau Index
+- Automated Readability Index
 
 ## Usage
 - npm i
