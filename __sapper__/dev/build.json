@@ -1,0 +1,23 @@
+{
+  "bundler": "webpack",
+  "shimport": null,
+  "assets": {
+    "formulas__layout": "d2de6ea198bd95fbba50/formulas__layout.formulas__layout.js",
+    "formulas_coleman$45liau": "d2de6ea198bd95fbba50/formulas_coleman$45liau.formulas_coleman$45liau.js",
+    "formulas_flesch$45kincaid": "d2de6ea198bd95fbba50/formulas_flesch$45kincaid.formulas_flesch$45kincaid.js",
+    "formulas_gunning$45flog": "d2de6ea198bd95fbba50/formulas_gunning$45flog.formulas_gunning$45flog.js",
+    "index": "d2de6ea198bd95fbba50/index.index.js",
+    "main": "d2de6ea198bd95fbba50/main.js",
+    "vendors~formulas_coleman$45liau~formulas_flesch$45kincaid~formulas_gunning$45flog": "d2de6ea198bd95fbba50/vendors~formulas_coleman$45liau~formulas_flesch$45kincaid~formulas_gunning$45flog.vendors~formulas_coleman$45liau~formulas_flesch$45kincaid~formulas_gunning$45flog.js",
+    "vendors~index": "d2de6ea198bd95fbba50/vendors~index.vendors~index.js"
+  },
+  "css": {
+    "chunks": {
+      "index.svelte": [],
+      "formulas/_layout.svelte": [],
+      "formulas/flesch-kincaid.svelte": [],
+      "formulas/coleman-liau.svelte": [],
+      "formulas/gunning-flog.svelte": []
+    }
+  }
+}

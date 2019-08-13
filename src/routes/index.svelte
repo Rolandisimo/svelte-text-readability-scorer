@@ -1,5 +1,5 @@
 <style lang="scss">
-  * {
+  :global(*){
     font-family: "Montserrat", sans-serif;
   }
   :global(a:hover) {
@@ -53,10 +53,10 @@
   $: gunningFlogScore = GunningFlogScorer.calculate(subjectText);
   $: colemanLiauScore = ColemanLiauScorer.calculate(subjectText);
 
-  let root = "/svelte-text-readability-scorer/";
+  let root = "/svelte-text-readability-scorer";
   onMount(() => {
     if (!window.location.href.includes("svelte-text-readability-scorer")) {
-      root = "/";
+      root = "";
     }
   });
 </script>
@@ -74,21 +74,21 @@
   <h6 class="read-more-info">Click on the titles to learn more about the formulas!</h6>
 
   <ScoreContainer
-    title={`<a href="${root}formulas/flesch-kincaid" rel='prefetch'>Flesch Kincaid Reading Ease</a>`}
+    title={`<a href="${root}/formulas/flesch-kincaid">Flesch Kincaid Reading Ease</a>`}
     value={fleschKincaidScore}
     leftValue={MAX_FLESC_KINCAID}
     rightValue={MIN_FLESC_KINCAID}
     reverse={true}
   />
   <ScoreContainer
-    title={`<a href="${root}formulas/gunning-flog" rel='prefetch'>Gunning Fog Index</a>`}
+    title={`<a href="${root}/formulas/gunning-flog">Gunning Fog Index</a>`}
     value={gunningFlogScore}
     subtitle={GunningFlogScorer.scoringLevel(gunningFlogScore)}
     leftValue={MIN_GUNNING_FLOG}
     rightValue={MAX_GUNNING_FLOG}
   />
   <ScoreContainer
-    title={`<a href="${root}formulas/coleman-liau" rel='prefetch'>Coleman Liau Index</a>`}
+    title={`<a href="${root}/formulas/coleman-liau">Coleman Liau Index</a>`}
     value={colemanLiauScore}
     leftValue={MIN_COLEMAN_LIAU_INDEX}
     rightValue={MAX_COLEMAN_LIAU_INDEX}

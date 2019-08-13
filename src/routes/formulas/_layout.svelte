@@ -35,7 +35,7 @@
     }
   }
 
-  a {
+  button {
     display: inline-flex;
     border: 1px solid;
     border-radius: 1px;
@@ -44,10 +44,13 @@
     text-decoration: none;
     align-items: center;
     transition: .1s;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1em;
+    cursor: pointer;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-color: transparent;
+      background-color: #f2f2f2;
+      border-color: #f2f2f2;
     }
   }
 </style>
@@ -55,21 +58,19 @@
 <script>
   import { onMount } from "svelte";
 
-  let root = "/svelte-text-readability-scorer"
+  $: goBack = function() {
+    window.history.back();
+  };
   onMount(() => {
     const table = document.querySelector("table");
     /** Styles cherry-picked from Bootstrap
      * @see https://getbootstrap.com/docs/4.0/content/tables
      */
     table && table.classList.add("table", "table-striped", "table-responsive-sm");
-
-    if (!window.location.href.includes("svelte-text-readability-scorer")) {
-      root = "/";
-    }
   });
 </script>
 
 <main>
-  <a href={root}>Back</a>
+  <button on:click={goBack}>Back</button>
   <slot></slot>
 </main>
