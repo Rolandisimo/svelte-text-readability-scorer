@@ -8,11 +8,39 @@
   import { ColemanLiauScorer, MAX_COLEMAN_LIAU_INDEX, MIN_COLEMAN_LIAU_INDEX } from "../scorers/ColemanLiauScorer.js";
   import { GunningFlogScorer, MAX_GUNNING_FLOG, MIN_GUNNING_FLOG } from "../scorers/GunningFlogScorer.js";
   import { AutomatedReadabilityIndex, MAX_AUTOMATED_READABILITY, MIN_AUTOMATED_READABILITY } from "../scorers/AutomatedReadability.js";
+  import {
+    countSentences,
+    countAvgLetters,
+    countWords,
+  } from "../helpers/writtenLanguageHelpers";
 
-  $: fleschKincaidScore = FleschKincaidScorer.calculate(text);
-  $: gunningFlogScore = GunningFlogScorer.calculate(text);
-  $: colemanLiauScore = ColemanLiauScorer.calculate(text);
-  $: automatedReadabilityScore = AutomatedReadabilityIndex.calculate(text);
+  $: words = countWords(text) || 1;
+  $: sentences = countSentences(text) || 1;
+  $: anl = countAvgLetters(text);
+  $: asl = words / sentences;
+
+  $: fleschKincaidScore = FleschKincaidScorer.calculate({
+    text,
+    words,
+    asl,
+  });
+  $: gunningFlogScore = GunningFlogScorer.calculate({
+    text,
+    words,
+    asl,
+  });
+  $: colemanLiauScore = ColemanLiauScorer.calculate({
+    text,
+    words,
+    sentences,
+    anl,
+  });
+  $: automatedReadabilityScore = AutomatedReadabilityIndex.calculate({
+    text,
+    words,
+    sentences,
+    anl,
+  });
 
   $: root = "";
   onMount(() => {

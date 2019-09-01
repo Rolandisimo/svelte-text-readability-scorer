@@ -1,8 +1,4 @@
-import {
-  countSentences,
-  countWords,
-  countHardWords,
-} from "../helpers/writtenLanguageHelpers";
+import { countHardWords } from "../helpers/writtenLanguageHelpers";
 
 export const MIN_GUNNING_FLOG = 0;
 export const MAX_GUNNING_FLOG = 30;
@@ -26,14 +22,11 @@ const scoreToLevelMap = {
 }
 
 export class GunningFlogScorer {
-  static calculate(text) {
+  static calculate({ text, words, asl }) {
     if (!text) {
       return MIN_GUNNING_FLOG;
     }
 
-    const words = countWords(text) || 1;
-    const sentences = countSentences(text) || 1;
-    const asl = words / sentences;
     const phw = 100 * (countHardWords(text) / words);
     let score = 0.4 * (asl + phw)
 

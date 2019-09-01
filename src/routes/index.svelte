@@ -19,9 +19,17 @@
   import FormGroup from "../components/FormGroup.svelte";
   import MetaScores from "../components/MetaScores.svelte";
   import Scores from "../components/Scores.svelte";
+  import { cleanTextFromAbbreviations } from "../helpers/writtenLanguageHelpers";
 
-  let text = "";
-  $: cleanText = text.trim();
+  let text = null;
+
+  beforeUpdate(() => {
+    text = text !== null ? text : window.sessionStorage.getItem("text");
+    window.sessionStorage.setItem("text", text);
+  });
+
+  $: cleanText = cleanTextFromAbbreviations((text || "").trim())
+
 </script>
 
 <div class="container">

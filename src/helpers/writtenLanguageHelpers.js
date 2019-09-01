@@ -1,4 +1,5 @@
 import syllable from "syllable";
+import { ABBREVIATION_TRANSLATIONS } from "./abbreviations";
 
 // TODO: Improve logic so that only a portion of
 // the text is evaluated and thus averaged e.g. only first 100 words/sentences/etc
@@ -15,12 +16,18 @@ export function countAvgLetters(text) {
   }, 0) / (words.length || 1);
 }
 
+export function cleanTextFromAbbreviations(text) {
+  return text.toLowerCase().split(" ").map((word) => {
+    return ABBREVIATION_TRANSLATIONS[word] || word;
+  }).join(" ");
+}
+
 export function findWords(text) {
   return text.match(/([^\u0000-\u007F]|\w)+/g) || [];
 }
 
 export function countSentences(text) {
-  const match = text.match(/[\w]\)?[.?!](\s|$)/g) || [];
+  const match = text.match(/[\w\"\'\)\.]?[.?!](\s|$)/g) || [];
   return match.length;
 }
 

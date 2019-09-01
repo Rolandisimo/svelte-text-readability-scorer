@@ -1,21 +1,12 @@
-import {
-  countSentences,
-  countAvgLetters,
-  countWords,
-} from "../helpers/writtenLanguageHelpers";
-
 export const MIN_COLEMAN_LIAU_INDEX = 0;
 export const MAX_COLEMAN_LIAU_INDEX = 30;
 
 export class ColemanLiauScorer {
-  static calculate(text) {
+  static calculate({ text, words, sentences, anl }) {
     if (!text) {
       return MIN_COLEMAN_LIAU_INDEX;
     }
 
-    const words = countWords(text) || 1;
-    const sentences = countSentences(text) || 1;
-    const anl = countAvgLetters(text);
     const ans = sentences / words;
     let score = (5.89 * anl) - (0.296 * ans) - 15.8;
 
