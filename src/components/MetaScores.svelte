@@ -18,11 +18,11 @@
 
 
 <script>
-  import { countWords, countSentences } from "../helpers/writtenLanguageHelpers.js";
-  export let text = "";
+  export let wordCount = "";
+  export let sentenceCount = "";
 </script>
 
 <div class="meta-scores">
-  <p><small>Word Count:</small> {countWords(text)}</p>
-  <p><small>Number of Sentences:</small> {countSentences(text)}</p>
+  <p><small>Word Count:</small> {wordCount}</p>
+  <p><small>Number of Sentences:</small> {sentenceCount}</p>
 </div>

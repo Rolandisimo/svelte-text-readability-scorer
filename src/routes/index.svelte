@@ -19,7 +19,7 @@
   import FormGroup from "../components/FormGroup.svelte";
   import MetaScores from "../components/MetaScores.svelte";
   import Scores from "../components/Scores.svelte";
-  import { cleanTextFromAbbreviations } from "../helpers/writtenLanguageHelpers";
+  import { TextAnalyzer } from "../helpers/TextAnalyzer";
 
   let text = null;
 
@@ -27,9 +27,7 @@
     text = text !== null ? text : window.sessionStorage.getItem("text");
     window.sessionStorage.setItem("text", text);
   });
-
-  $: cleanText = cleanTextFromAbbreviations((text || "").trim())
-
+  $: analyzer = new TextAnalyzer(text)
 </script>
 
 <div class="container">
@@ -41,8 +39,8 @@
     placeholder="Write your text here and see the score being calculated"
   />
 
-  <MetaScores text={cleanText} />
+  <MetaScores wordCount={analyzer.wordCount()} sentenceCount={analyzer.countSentences()} />
   <h6 class="read-more-info">Click on the titles to learn more about the formulas!</h6>
 
-  <Scores text={cleanText} />
+  <Scores analyzer={analyzer} />
 </div>

@@ -1,5 +1,3 @@
-import { countHardWords } from "../helpers/writtenLanguageHelpers";
-
 export const MIN_GUNNING_FLOG = 0;
 export const MAX_GUNNING_FLOG = 30;
 
@@ -22,12 +20,12 @@ const scoreToLevelMap = {
 }
 
 export class GunningFlogScorer {
-  static calculate({ text, words, asl }) {
+  static calculate({ text, hardWordCount, words, asl }) {
     if (!text) {
       return MIN_GUNNING_FLOG;
     }
 
-    const phw = 100 * (countHardWords(text) / words);
+    const phw = 100 * (hardWordCount / words);
     let score = 0.4 * (asl + phw)
 
     if (score > MAX_GUNNING_FLOG) {

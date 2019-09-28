@@ -1,5 +1,5 @@
 <script>
-  export let text = "";
+  export let analyzer;
 
   import { onMount } from "svelte"
   import ScoreContainer from "../components/ScoreContainer.svelte";
@@ -8,27 +8,28 @@
   import { ColemanLiauScorer, MAX_COLEMAN_LIAU_INDEX, MIN_COLEMAN_LIAU_INDEX } from "../scorers/ColemanLiauScorer.js";
   import { GunningFlogScorer, MAX_GUNNING_FLOG, MIN_GUNNING_FLOG } from "../scorers/GunningFlogScorer.js";
   import { AutomatedReadabilityIndex, MAX_AUTOMATED_READABILITY, MIN_AUTOMATED_READABILITY } from "../scorers/AutomatedReadability.js";
-  import {
-    countSentences,
-    countAvgLetters,
-    countWords,
-  } from "../helpers/writtenLanguageHelpers";
 
-  $: words = countWords(text) || 1;
-  $: sentences = countSentences(text) || 1;
-  $: anl = countAvgLetters(text);
+  $: text = analyzer.text;
+  $: words = analyzer.wordCount();
+  $: sentences = analyzer.countSentences() || 1;
+  $: anl = analyzer.countAvgLetters();
   $: asl = words / sentences;
+  $: counts = analyzer.mapThroughText();
 
   $: fleschKincaidScore = FleschKincaidScorer.calculate({
     text,
     words,
     asl,
+    syllableCount: counts.syllableCount,
   });
+
   $: gunningFlogScore = GunningFlogScorer.calculate({
     text,
     words,
+    hardWordCount: counts.hardWordCount,
     asl,
   });
+
   $: colemanLiauScore = ColemanLiauScorer.calculate({
     text,
     words,
