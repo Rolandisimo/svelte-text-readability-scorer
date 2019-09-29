@@ -28,7 +28,7 @@
     word-break: break-word;
 
     &:hover {
-      background-color: $mainColor;
+      background-color: $mainColorHover;
     }
 
     &.error {
