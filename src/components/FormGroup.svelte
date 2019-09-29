@@ -95,7 +95,11 @@
   const acceptedFileTypes = [
     "text/plain",
   ];
-  const acceptAttribute = acceptedFileTypes.join();
+  const acceptedExtensions = [
+    ".txt",
+    ".TXT",
+  ];
+  const acceptAttribute = acceptedExtensions.join();
 
   const readFiles = (files) => {
     return Promise.all(files.map(file => {
