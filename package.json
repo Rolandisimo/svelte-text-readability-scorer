@@ -12,12 +12,14 @@
     "test": "run-p --race dev cy:run",
     "export-with-base-url": "BASE_URL=/svelte-text-readability-scorer npx sapper export --basepath svelte-text-readability-scorer",
     "publish-gh-pages-no-domain": "git push origin --delete gh-pages && git subtree push --prefix __sapper__/export/svelte-text-readability-scorer origin gh-pages",
-    "publish-gh-pages-custom-domain": "git push origin --delete gh-pages && git subtree push --prefix __sapper__/export origin gh-pages"
+    "publish-gh-pages-custom-domain": "git push origin --delete gh-pages && git subtree push --prefix __sapper__/export origin gh-pages",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "compression": "^1.7.4",
     "cypress": "^3.4.1",
     "express": "^4.17.1",
+    "gh-pages": "^2.1.1",
     "helmet": "^3.21.1",
     "html-loader": "^0.5.5",
     "markdown-it": "^10.0.0",
