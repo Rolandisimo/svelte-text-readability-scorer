@@ -6,14 +6,12 @@
     "dev": "sapper dev",
     "build": "sapper build",
     "export": "sapper export",
+    "export-with-base-url": "BASE_URL=/svelte-text-readability-scorer npx sapper export --basepath svelte-text-readability-scorer",
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "test": "run-p --race dev cy:run",
-    "export-with-base-url": "BASE_URL=/svelte-text-readability-scorer npx sapper export --basepath svelte-text-readability-scorer",
-    "publish-gh-pages-no-domain": "git push origin --delete gh-pages && git subtree push --prefix __sapper__/export/svelte-text-readability-scorer origin gh-pages",
-    "publish-gh-pages-custom-domain": "git push origin --delete gh-pages && git subtree push --prefix __sapper__/export origin gh-pages",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run export && gh-pages -d __sapper__/export"
   },
   "dependencies": {
     "compression": "^1.7.4",
