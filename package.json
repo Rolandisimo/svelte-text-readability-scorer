@@ -27,7 +27,7 @@
     "syllable": "^4.0.0"
   },
   "devDependencies": {
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "npm-run-all": "^4.1.5",
     "sapper": "^0.27.11",
     "sass": "^1.22.12",
