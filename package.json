@@ -19,9 +19,9 @@
     "express": "^4.17.1",
     "gh-pages": "^2.1.1",
     "helmet": "^3.21.1",
-    "html-loader": "^0.5.5",
+    "html-loader": "^4.2.0",
     "markdown-it": "^10.0.0",
-    "markdown-loader": "^5.1.0",
+    "markdown-loader": "^8.0.0",
     "polka": "^0.5.2",
     "sirv": "^0.4.2",
     "syllable": "^4.0.0"
@@ -32,8 +32,8 @@
     "sapper": "^0.27.11",
     "sass": "^1.22.12",
     "svelte": "^3.12.1",
-    "svelte-loader": "^2.13.6",
+    "svelte-loader": "^3.1.4",
     "svelte-preprocess": "^3.1.2",
-    "webpack": "^4.7.0"
+    "webpack": "^5.75.0"
   }
 }
